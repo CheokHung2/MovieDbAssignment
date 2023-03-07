@@ -1,4 +1,4 @@
-package com.learningSpring.MovieApp;
+package com.learningSpring.MovieApp.Movie;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

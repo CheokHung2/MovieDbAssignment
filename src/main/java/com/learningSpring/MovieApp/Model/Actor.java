@@ -4,12 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
-
 public class Actor {
 
     @Id @GeneratedValue @Column(name = "id",unique = true)Long id;
@@ -59,7 +57,7 @@ public class Actor {
     public String toString() {
         return "Actor{" +
                 "name='" + name + '\'' +
-                ", movies=" + movies +
+//                ", movies=" + movies +
                 '}';
     }
 }

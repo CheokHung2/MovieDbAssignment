@@ -1,5 +1,6 @@
 package com.learningSpring.MovieApp;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,6 +12,7 @@ public class MovieController {
     // referencing https://spring.io/guides/tutorials/rest/
     private final MovieRepository repository;
     private final ActorRepository actorRepository;
+    @Autowired
     MovieController(MovieRepository repository, ActorRepository actorRepository){
         this.repository = repository;
         this.actorRepository = actorRepository;
@@ -54,17 +56,7 @@ public class MovieController {
         movie.setRelease_Year(newMovie.getRelease_Year());
 
         Set<Actor> actors = newMovie.getActors();
-        for (Actor actor : actors) {
-            Boolean exists = actorRepository.existsByName(actor.getName());
-            if (exists) {
-                Actor existActor = actorRepository.findActorsByName(actor.getName());
-                movie.addActor(existActor);
-            } else {
-                Actor newActor = new Actor();
-                newActor.setName(actor.getName());
-                movie.addActor(newActor);
-            }
-        }
+        actorAdder.addOrUpdateActor(actors, movie, actorRepository);
         return repository.save(movie);
     }
     @PutMapping("/movies/{id}")
